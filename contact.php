@@ -1,42 +1,45 @@
-<?php include("header.php"); ?>
-<html>
-	<head>
-	<meta charset="utf-8">
-	<title> Contact</title>
-	</head>
-<body>
-<main>
-<p>SEND E-MAIL</p>
-<form class="contact-form" action="contactform.php" method="post">
-	<input type="text" name="name" placeholder="Full name...">
-	<input type="text" name="mail" placeholder="E-mail...">
-	<input type="text" name="subject" placeholder="Subject...">
-	<textarea name="message" placeholder="Message"></textarea>
-	<button type="submit" name="submit">SEND</button>
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
-	if(isset($_GET["error"]))
-{
-	if($_GET["error"] == "emptyinput")
-		{
-			echo "<p>Fill in all fields!</p>";
-		}
-	else if ($_GET["error"] == "invalidEmail")
-		{
-		echo "<p>E-mail is invalid!</p>";
-		}
-}
-if(isset($_GET["error"]))
-{
-	if($_GET["error"] == "mailsend")
-		{
-			echo "<p>Ati trimis mail-ul!</p>";
-		}
 
+if(isset($_POST['name']) && isset($_POST['email'])){
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $body = $_POST['body'];
+
+    require_once "PHPMailer/PHPMailer.php";
+    require_once "PHPMailer/SMTP.php";
+    require_once "PHPMailer/Exception.php";
+
+    $mail = new PHPMailer();
+
+    //smtp settings
+    $mail->isSMTP();
+    $mail->Host = "smtp.gmail.com";
+    $mail->SMTPAuth = true;
+    $mail->Username = "...";
+    $mail->Password = '...';
+    $mail->Port = 465;
+    $mail->SMTPSecure = "ssl";
+
+    //email settings
+    $mail->isHTML(true);
+    $mail->setFrom($email, $name);
+    $mail->addAddress("...");
+    $mail->Subject = ("$email ($subject)");
+    $mail->Body = $body;
+
+    if($mail->send()){
+        $status = "success";
+        $response = "Email is sent!";
+    }
+    else
+    {
+        $status = "failed";
+        $response = "Something is wrong: <br>" . $mail->ErrorInfo;
+    }
+
+    exit(json_encode(array("status" => $status, "response" => $response)));
 }
+
 ?>
-</form>
-</main>
-</body>
-</html>
-<?php include("footer.php"); ?>
