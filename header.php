@@ -29,17 +29,20 @@
 					echo "<li><a href='signup.php'>Sign up</a></li>";
 					echo "<li><a href='login.php'>Login</a></li>";
 					}
-					
-					if(isset($_SESSION["useruid"]) && $_SESSION["useruid"]=='Robert71')
+					require('dbh.inc.php');
+					require('functions.inc.php');
+					$admin=getAdmin($conn);
+					if(isset($_SESSION["useruid"]) && $admin==1)
 					{
 					echo "<li><a href='gestionarebd.php'>Gestioneaza baza de date</a></li>";
+					    
 					}
 						
 					?>
 					<li><a href="#">-</a>
 					</li>
 						
-					<li><a href="contact.php">Contact</a>
+					<li><a href="contactform.php">Contact</a>
 					
 					</li>
 			</div>
