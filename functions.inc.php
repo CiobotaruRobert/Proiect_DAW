@@ -237,6 +237,27 @@ function deleteUser($conn, $username)
 }
 
 
+function getAdmin($conn)
+{
+    session_start();
+    if(isset($_SESSION["useruid"])){
 
+           $query = "SELECT tip_user FROM users WHERE usersUid= '".$_SESSION['useruid']."'";
+
+           $result = mysqli_query($conn, $query) or 
+
+           die(mysql_error($conn)); 
+
+           if (!$result) die('Query failed: ' . mysqli_error($conn)); 
+
+           while($row = mysqli_fetch_array($result)){ 
+
+           $rez= $row['tip_user'];
+
+        }
+        return $rez;
+    }
+
+}
 
 
