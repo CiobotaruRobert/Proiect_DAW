@@ -4,6 +4,7 @@
 <?php include 'gestionarebd.css'; ?>
 </style>
 
+
 <section class="insert-form">
 <h2>Insereaza un film</h2>
 <div class="insert-form">
@@ -16,6 +17,8 @@
 </form>
 </div>
 
+<a href=exportusers.php><button class="buton_export_useri">Export useri</button></a>
+
 <h2>Sterge un film</h2>
 
 <div class="delete-form">
@@ -25,6 +28,8 @@
 <button type="submit" name="submit">Sterge film</button>
 </form>
 </div>
+
+<a href=exportangajati.php><button class="buton_export_angajati">Export angajati</button></a>
 
 <h2>Sterge un utilizator</h2>
 

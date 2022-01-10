@@ -35,7 +35,7 @@
 					if(isset($_SESSION["useruid"]) && $admin==1)
 					{
 					echo "<li><a href='gestionarebd.php'>Gestioneaza baza de date</a></li>";
-					    
+					echo "<li><a href='counter.php'>Statistici</a></li>";
 					}
 						
 					?>

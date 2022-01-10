@@ -3,6 +3,7 @@
 <style>
 <?php include 'pagina_cautare_style.css'; ?>
 </style>
+<a href=exportfilme.php><button class="buton_export_filme" >Descarca lista filme</button></a>
 <form action="search.php" method="POST">
 	<input type="text" name="search" placeholder="Search...">
 	<button type="submit" name="submit-search">Cauta</button>

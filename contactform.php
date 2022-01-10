@@ -1,78 +1,94 @@
+<?php include "header.php"?>
+<?php
+  if($_POST){
+    $emailTo="dawp16555@gmail.com";
+    $subject=$_POST['subject'];
+    $content=$_POST['content'];
+    $headers='From: '.$_POST['email'];
+
+    if(mail($emailTo,$subject,$content,$headers)){
+      echo '<div class="container alert alert-success text-center">
+            Your message was sent, we will get back to you ASAP!</div>';
+    }else{
+      echo '<div class="container alert alert-danger text-center">
+            Your message couldn\'t be sent, please try again later</div>';
+    }
+  }
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
-<html>
-<?php include("header.php"); ?>
-<head>
-    <title>Trimite-ne un e-mail!</title>
-</head>
-<body>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Contact Form</title>
+    
+     <!-- JS -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <style>body{background-color:lightblue;}</style>
+     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    
+  </head>
+  <body>
+      <div class='container'>
+      
+      <h1>Trimite-ne un mesaj!</h1>
+      <div id='error'></div>
+      <form method='POST'>
+        <fieldset class='form-group'>
+          <label for='email'>Email address</label>
+          <input type='email' class='form-control' id='email' name='email'>
+          <small class='text-muted'>we'll never share your email with anyone else</small>
+        </fieldset>
+        <fieldset class='form-group'>
+          <label for='subject'>Subject</label>
+          <input type='text' class='form-control' id='subject' name='subject'>
+        </fieldset>
+        <fieldset class='form-group'>
+          <label for='content'>What you would like to ask us ?</label>
+          <textarea class='form-control' id='content' name='content' rows='3'></textarea>
+        </fieldset>
+        <button type='submit' id='submit' class='btn btn-primary'>Submit</button>
+      </form>
 
-	<center>
-		<h4 class="sent-notification"></h4>
+   <script type='text/javascript'>
+     $('form').submit(function(e){
+       var error='';
 
-		<form id="myForm">
-			<h2>Trimite-ne un e-mail!</h2>
+       if($('#email').val()==""){
+         error +="The email field is required.<br>"
+       }
+       if($('#subject').val()==""){
+         error +="The subject field is required.<br>"
+       }
+       if($('#content').val()==""){
+         error +="The content field is required.<br>"
+       }
+       if(error !=""){
+         $("#error").html('<div class="alert alert-danger"><p><strong>There were error(s) in your form:</strong></p>' + error + '</div>')
+         return false;
+       }else{
+         return true;
+       }
+     })
+   
+   
+   </script>
 
-			<label>Nume</label>
-			<input id="name" type="text" placeholder=" Numele dvs...">
-			<br><br>
-
-			<label>E-mail</label>
-			<input id="email" type="text" placeholder=" Adresa e-mail...">
-			<br><br>
-
-			<label>Subiect</label>
-			<input id="subject" type="text" placeholder=" Subiect...">
-			<br><br>
-
-			<p>Mesaj</p>
-			<textarea id="body" rows="5" placeholder="Scrieti mesajul..."></textarea>
-			<br><br>
-
-			<button type="button" onclick="sendEmail()" value="Trimite un mail">Submit</button>
-		</form>
-	</center>
-
-	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript">
-        function sendEmail() {
-            var name = $("#name");
-            var email = $("#email");
-            var subject = $("#subject");
-            var body = $("#body");
-
-            if (isNotEmpty(name) && isNotEmpty(email) && isNotEmpty(subject) && isNotEmpty(body)) {
-                $.ajax({
-                   url: 'contact.php',
-                   method: 'POST',
-                   dataType: 'json',
-                   data: {
-                       name: name.val(),
-                       email: email.val(),
-                       subject: subject.val(),
-                       body: body.val()
-                   }, success: function (response) {
-                        $('#myForm')[0].reset();
-                        $('.sent-notification').text("Mesaj trimis cu succes!");
-                   }
-                });
-            }
-        }
-
-        function isNotEmpty(caller) {
-            if (caller.val() == "") {
-                caller.css('border', '1px solid red');
-                return false;
-            } else
-                caller.css('border', '');
-
-            return true;
-        }
-    </script>
-<style>
-<?php include 'pagini_css.css'; ?>
-</style>
-
-
-<?php include ("footer.php"); ?>
-</body>
+      
+      </div>
+      
+          
+  </body>
 </html>
+

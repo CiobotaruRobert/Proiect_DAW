@@ -6,13 +6,18 @@ padding:30px;
 padding-bottom:30px;
 width:100%;
 }
-input{padding: 0px 20px;
-	width 300px;
+input{padding: 0 20px;
+	width: 300px;
 	height:40px;
 	font-size:22px;
 }
 button{
-	width 100px;
+	width: 120px;
 	height:44px;
+	font-size:22px;
+}
+.buton_export_filme{
+	width: 120px;
+	height:55px;
 	font-size:22px;
 }

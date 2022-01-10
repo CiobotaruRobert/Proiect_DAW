@@ -236,7 +236,6 @@ function deleteUser($conn, $username)
 		exit();	
 }
 
-
 function getAdmin($conn)
 {
     session_start();
@@ -259,5 +258,8 @@ function getAdmin($conn)
     }
 
 }
+
+
+
 
 

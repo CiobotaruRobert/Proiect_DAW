@@ -6,6 +6,22 @@
   height: 100px; 
 
 }
+.button{
+    margin-left:1000px;
+    
+}
+.buton_export_useri{
+	width: 120px;
+	height:55px;
+	font-size:22px;
+	margin-left:500px;
+}
+.buton_export_angajati{
+	width: 120px;
+	height:55px;
+	font-size:22px;
+		margin-left:500px;
+}
 
 .delete-form {
   font-family: arial;
